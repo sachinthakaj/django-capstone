@@ -30,6 +30,7 @@ class Booking(models.Model):
             raise ValidationError({'booking_date': "Booking date must be in the future."})
 
     def save(self, *args, **kwargs):
+        self.full_clean()
         self.total_price = self.service.price * self.number_of_guests
         super().save(*args, **kwargs)
 
